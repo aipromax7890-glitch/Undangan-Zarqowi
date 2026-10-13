@@ -1,0 +1,839 @@
+/**
+ * Modern Betawi Luxury Wedding Editorial 2026
+ * The Wedding of Wahyu Zarqowi & Jennian Nayla (Naylun)
+ * Designed & Developed by Haddad Al Farisi
+ */
+
+/* ==========================================================================
+   1. CSS Custom Properties / Design Tokens
+   ========================================================================== */
+:root {
+  /* Editorial Palette: Betawi Heritage meets Modern Luxury */
+  --color-ivory: #FAF7F0;
+  --color-ivory-warm: #F4EFE6;
+  --color-cream: #EDE6D6;
+  --color-forest: #172F24;
+  --color-forest-dark: #0F2018;
+  --color-forest-light: #254636;
+  --color-gold: #C5A059;
+  --color-gold-light: #E0C78B;
+  --color-gold-dark: #9E7933;
+  --color-terracotta: #B85D35;
+  --color-terracotta-dark: #914322;
+  --color-mustard: #D89C2A;
+  --color-text-primary: #1C261F;
+  --color-text-muted: #596B60;
+  --color-card-bg: #FFFFFF;
+  --color-card-border: rgba(197, 160, 89, 0.28);
+
+  /* Typography */
+  --font-serif-display: 'Cinzel', 'Playfair Display', serif;
+  --font-serif-body: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-arabic: 'Amiri', 'Traditional Arabic', serif;
+
+  /* Shadows & Elevations */
+  --shadow-subtle: 0 4px 20px rgba(23, 47, 36, 0.06);
+  --shadow-card: 0 10px 30px rgba(23, 47, 36, 0.08);
+  --shadow-elevated: 0 20px 45px rgba(23, 47, 36, 0.14);
+
+  /* Transitions */
+  --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   2. Reset & Typography Baseline
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  background-color: var(--color-ivory);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-ivory);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scroll Lock when Cover Gate is active */
+body.cover-active {
+  overflow: hidden;
+  height: 100vh;
+}
+
+h1, h2, h3, h4, .font-serif {
+  font-family: var(--font-serif-body);
+  letter-spacing: -0.01em;
+  color: var(--color-forest);
+}
+
+.font-display {
+  font-family: var(--font-serif-display);
+  letter-spacing: 0.04em;
+}
+
+.font-arabic {
+  font-family: var(--font-arabic);
+  direction: rtl;
+  font-size: 1.45rem;
+  line-height: 2.1;
+  color: var(--color-forest);
+}
+
+/* ==========================================================================
+   3. Authentic Betawi Gigi Balang Ornaments
+   ========================================================================== */
+/* The Gigi Balang pattern: Authentic Betawi traditional triangular geometric lisplang motif */
+.gigi-balang-border {
+  width: 100%;
+  height: 16px;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--color-gold) 0,
+    var(--color-gold) 8px,
+    transparent 8px,
+    transparent 16px
+  ), repeating-linear-gradient(
+    45deg,
+    var(--color-gold) 0,
+    var(--color-gold) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+  background-size: 22px 16px;
+  opacity: 0.85;
+}
+
+.gigi-balang-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 1.5rem auto;
+  max-width: 240px;
+}
+
+.gigi-balang-divider .line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+.gigi-balang-divider .rhombus {
+  width: 9px;
+  height: 9px;
+  background: var(--color-gold);
+  transform: rotate(45deg);
+}
+
+.gigi-balang-band {
+  background-color: var(--color-forest);
+  position: relative;
+  overflow: hidden;
+}
+
+.gigi-balang-band::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: repeating-linear-gradient(
+    135deg,
+    var(--color-gold) 0,
+    var(--color-gold) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+}
+
+/* ==========================================================================
+   4. Cover / Hero Gate (Full Screen Modal Envelope)
+   ========================================================================== */
+#invitationCover {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: radial-gradient(circle at 50% 30%, #FDFBF7 0%, #F5EFE3 60%, #E9DFC9 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 1.5rem 1rem;
+  transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
+}
+
+#invitationCover.opened {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cover-container {
+  width: 100%;
+  max-width: 520px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--color-card-border);
+  box-shadow: 0 25px 60px rgba(23, 47, 36, 0.16);
+  border-radius: 20px;
+  padding: 2.25rem 1.75rem;
+  text-align: center;
+  position: relative;
+  margin: auto;
+}
+
+.cover-corner-ornament {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border-style: solid;
+  border-color: var(--color-gold);
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.cover-corner-ornament.top-left {
+  top: 14px;
+  left: 14px;
+  border-width: 2px 0 0 2px;
+}
+
+.cover-corner-ornament.top-right {
+  top: 14px;
+  right: 14px;
+  border-width: 2px 2px 0 0;
+}
+
+.cover-corner-ornament.bottom-left {
+  bottom: 14px;
+  left: 14px;
+  border-width: 0 0 2px 2px;
+}
+
+.cover-corner-ornament.bottom-right {
+  bottom: 14px;
+  right: 14px;
+  border-width: 0 2px 2px 0;
+}
+
+.guest-pill {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-ivory-warm);
+  border: 1px dashed var(--color-gold);
+  border-radius: 12px;
+  margin: 1rem 0;
+}
+
+/* ==========================================================================
+   5. Authentic Rumah Kebaya SVG & Animation
+   ========================================================================== */
+.betawi-house-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.betawi-svg-house {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 15px 25px rgba(23, 47, 36, 0.12));
+}
+
+/* Gentle CSS Animations for Rumah Kebaya elements */
+@keyframes lanternSway {
+  0%, 100% {
+    transform: rotate(-3deg);
+    transform-origin: top center;
+  }
+  50% {
+    transform: rotate(3deg);
+    transform-origin: top center;
+  }
+}
+
+@keyframes leafDrift {
+  0%, 100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  50% {
+    transform: rotate(2deg) translateY(-3px);
+  }
+}
+
+@keyframes cloudMove {
+  0% {
+    transform: translateX(-40px);
+  }
+  100% {
+    transform: translateX(40px);
+  }
+}
+
+.animate-sway-left {
+  animation: lanternSway 3.8s ease-in-out infinite;
+}
+
+.animate-sway-right {
+  animation: lanternSway 3.2s ease-in-out infinite 0.6s;
+}
+
+.animate-leaf-left {
+  animation: leafDrift 4.5s ease-in-out infinite;
+  transform-origin: bottom left;
+}
+
+.animate-leaf-right {
+  animation: leafDrift 5s ease-in-out infinite 1s;
+  transform-origin: bottom right;
+}
+
+.animate-cloud-slow {
+  animation: cloudMove 18s ease-in-out infinite alternate;
+}
+
+/* ==========================================================================
+   6. Editorial Couple Section & Portrait Frames
+   ========================================================================== */
+.portrait-frame-arch {
+  position: relative;
+  width: 100%;
+  max-width: 290px;
+  margin: 0 auto;
+  aspect-ratio: 3 / 4;
+  border-radius: 140px 140px 18px 18px;
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(23, 47, 36, 0.14);
+  border: 4px solid #FFFFFF;
+  background-color: var(--color-cream);
+}
+
+.portrait-frame-arch::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(197, 160, 89, 0.5);
+  border-radius: 134px 134px 12px 12px;
+  pointer-events: none;
+}
+
+.portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.portrait-frame-arch:hover .portrait-img {
+  transform: scale(1.04);
+}
+
+/* ==========================================================================
+   7. Countdown Box Grid
+   ========================================================================== */
+.countdown-box {
+  background: #FFFFFF;
+  border: 1px solid var(--color-card-border);
+  border-radius: 14px;
+  padding: 1.1rem 0.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-subtle);
+  min-width: 68px;
+}
+
+.countdown-number {
+  font-family: var(--font-serif-body);
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-forest);
+  margin-bottom: 0.25rem;
+}
+
+.countdown-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold-dark);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   8. Cards & Wedding Details
+   ========================================================================== */
+.event-card {
+  background: #FFFFFF;
+  border: 1px solid var(--color-card-border);
+  border-radius: 18px;
+  padding: 2.25rem 1.75rem;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  transition: var(--transition-smooth);
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-elevated);
+}
+
+.event-badge-arch {
+  display: inline-block;
+  padding: 0.35rem 1.25rem;
+  background-color: var(--color-forest);
+  color: var(--color-gold-light);
+  font-family: var(--font-serif-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+
+/* Digital Bank Card Visuals */
+.digital-bank-card {
+  background: linear-gradient(135deg, #1B3527 0%, #11241A 100%);
+  color: #FFFFFF;
+  border-radius: 16px;
+  padding: 1.5rem 1.4rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 14px 32px rgba(17, 36, 26, 0.25);
+  border: 1px solid rgba(224, 199, 139, 0.3);
+}
+
+.digital-bank-card::before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(197, 160, 89, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.digital-bank-card.bni-card {
+  background: linear-gradient(135deg, #2D4C3A 0%, #173224 100%);
+}
+
+.chip-graphic {
+  width: 36px;
+  height: 28px;
+  background: linear-gradient(135deg, #EAD098 0%, #BA9547 100%);
+  border-radius: 5px;
+  border: 1px solid #7D5E21;
+}
+
+/* ==========================================================================
+   9. Photo Gallery & Lightbox
+   ========================================================================== */
+.gallery-item {
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid rgba(197, 160, 89, 0.25);
+  background-color: var(--color-ivory-warm);
+  position: relative;
+  aspect-ratio: 4 / 5;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.06);
+}
+
+.gallery-item .gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(23, 47, 36, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+
+/* Lightbox Modal */
+#galleryLightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 32, 24, 0.94);
+  backdrop-filter: blur(10px);
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+#galleryLightbox.active {
+  display: flex;
+}
+
+.lightbox-content-box {
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  position: relative;
+  text-align: center;
+}
+
+.lightbox-main-img {
+  max-height: 75vh;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+  border: 2px solid var(--color-gold);
+}
+
+.lightbox-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(23, 47, 36, 0.7);
+  color: #FFFFFF;
+  border: 1px solid var(--color-gold);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.lightbox-btn:hover {
+  background: var(--color-gold);
+  color: var(--color-forest);
+}
+
+.lightbox-btn.prev {
+  left: 10px;
+}
+
+.lightbox-btn.next {
+  right: 10px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -46px;
+  right: 0;
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   10. Floating Widgets (Music & Bottom Dock)
+   ========================================================================== */
+/* Floating Music Disc Controller */
+#floatingMusicWidget {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: none;
+}
+
+.music-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-forest);
+  border: 2px solid var(--color-gold);
+  color: var(--color-gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(23, 47, 36, 0.25);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.music-btn.playing {
+  animation: spinRecord 6s linear infinite;
+}
+
+@keyframes spinRecord {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Floating Bottom Navigation Bar */
+#bottomNavBar {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 990;
+  background: rgba(23, 47, 36, 0.94);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  border-radius: 35px;
+  padding: 6px 12px;
+  display: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+}
+
+.nav-dock-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 0.68rem;
+  padding: 6px 10px;
+  border-radius: 20px;
+  transition: var(--transition-smooth);
+}
+
+.nav-dock-item i {
+  font-size: 1.15rem;
+  margin-bottom: 2px;
+}
+
+.nav-dock-item:hover, .nav-dock-item.active {
+  color: var(--color-gold-light);
+}
+
+/* Back to Top */
+#backToTopBtn {
+  position: fixed;
+  bottom: 80px;
+  right: 18px;
+  z-index: 980;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--color-ivory-warm);
+  border: 1px solid var(--color-gold);
+  color: var(--color-forest);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-subtle);
+  transition: var(--transition-smooth);
+}
+
+#backToTopBtn:hover {
+  background: var(--color-gold);
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   11. Buttons & Utility Styling
+   ========================================================================== */
+.btn-luxury-primary {
+  background-color: var(--color-forest);
+  color: #FFFFFF;
+  border: 1px solid var(--color-gold);
+  padding: 0.75rem 1.6rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.03em;
+  border-radius: 10px;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.btn-luxury-primary:hover {
+  background-color: var(--color-forest-dark);
+  color: var(--color-gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(23, 47, 36, 0.2);
+}
+
+.btn-luxury-outline {
+  background-color: transparent;
+  color: var(--color-forest);
+  border: 1.5px solid var(--color-forest);
+  padding: 0.65rem 1.4rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.btn-luxury-outline:hover {
+  background-color: var(--color-forest);
+  color: #FFFFFF;
+}
+
+.btn-luxury-gold {
+  background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-dark) 100%);
+  color: #FFFFFF;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: 10px;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.btn-luxury-gold:hover {
+  filter: brightness(1.08);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+/* Toast Notification */
+#weddingToast {
+  position: fixed;
+  bottom: 85px;
+  left: 50%;
+  transform: translateX(-50%) translateY(40px);
+  background: var(--color-forest);
+  color: #FFFFFF;
+  border: 1px solid var(--color-gold);
+  padding: 10px 22px;
+  border-radius: 30px;
+  font-size: 0.88rem;
+  z-index: 10001;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+#weddingToast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* Turut Mengundang List Styling */
+.turut-mengundang-card {
+  background: #FFFFFF;
+  border: 1px solid var(--color-card-border);
+  border-radius: 16px;
+  padding: 2.25rem 2rem;
+  box-shadow: var(--shadow-card);
+}
+
+.turut-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 0.75rem 0;
+  border-bottom: 1px dashed rgba(197, 160, 89, 0.25);
+}
+
+.turut-item:last-child {
+  border-bottom: none;
+}
+
+.turut-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--color-ivory-warm);
+  border: 1px solid var(--color-gold);
+  color: var(--color-forest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif-body);
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+/* Guestbook Item */
+.guestbook-card {
+  background: #FFFFFF;
+  border: 1px solid var(--color-card-border);
+  border-radius: 14px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow-subtle);
+}
+
+.guest-badge-hadir {
+  background: #E8F5E9;
+  color: #2E7D32;
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.guest-badge-ragu {
+  background: #FFF8E1;
+  color: #F57F17;
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.guest-badge-absen {
+  background: #FFEBEE;
+  color: #C62828;
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+/* Accessibility / Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

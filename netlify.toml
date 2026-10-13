@@ -1,0 +1,11 @@
+# Netlify configuration for Wahyu & Naylun Wedding Invitation
+# Pure static website deployment (Zero build command required)
+
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
