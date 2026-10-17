@@ -350,31 +350,31 @@
 
   // 9. Lightbox Photo Gallery
   const galleryImages = [
-    {
-      src: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80",
-      caption: "Potret Kehangatan Mempelai - Sentuhan Klasik Modern Betawi"
-    },
-    {
-      src: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80",
-      caption: "Janji Suci Dua Jiwa dalam Naungan Restu Keluarga Tercinta"
-    },
-    {
-      src: "https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1200&q=80",
-      caption: "Kemegahan Ornamen Tradisi Berpadu Harmoni Kemewahan Abadi"
-    },
-    {
-      src: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80",
-      caption: "Langkah Menuju Hari Bahagia - 25 Oktober 2026"
-    },
-    {
-      src: "https://images.unsplash.com/photo-1544077960-604201fe74bc?auto=format&fit=crop&w=1200&q=80",
-      caption: "Momen Silaturahmi Hangat Penuh Kasih & Keberkahan"
-    },
-    {
-      src: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=80",
-      caption: "Ikrar Abadi Menuju Mahligai Rumah Tangga Sakinah Mawaddah Warahmah"
-    }
-  ];
+  {
+    src: "./images/reja5.jpg",
+    caption: "Potret Kehangatan Mempelai - Sentuhan Klasik Modern Betawi"
+  },
+  {
+    src: "./images/reja6.jpg",
+    caption: "Janji Suci Dua Jiwa dalam Naungan Restu Keluarga Tercinta"
+  },
+  {
+    src: "./images/reja1.jpg",
+    caption: "Kemegahan Ornamen Tradisi Berpadu Harmoni Kemewahan Abadi"
+  },
+  {
+    src: "./images/reja2.jpg",
+    caption: "Langkah Menuju Hari Bahagia - 25 Oktober 2026"
+  },
+  {
+    src: "./images/reja3.jpg",
+    caption: "Momen Silaturahmi Hangat Penuh Kasih & Keberkahan"
+  },
+  {
+    src: "./images/reja7.jpg",
+    caption: "Ikrar Abadi Menuju Mahligai Rumah Tangga Sakinah Mawaddah Warahmah"
+  }
+];
 
   let currentGalleryIndex = 0;
   const lightboxModal = document.getElementById('galleryLightbox');
